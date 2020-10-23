@@ -22,12 +22,6 @@ export default {
       search: '',
       headers: [
         {
-          text: 'phone',
-          align: 'start',
-          sortable: false,
-          value: 'phone',
-        },
-        {
           text: 'genre',
           value: 'genre',
         },

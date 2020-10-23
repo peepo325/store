@@ -71,13 +71,18 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          icon: 'mdi-chart-bubble',
+          title: 'Homepage',
           to: '/',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Refill',
+          title: 'check',
+          to: '/check',
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Mobile',
           to: '/FromRifill',
         },
         {
@@ -85,11 +90,21 @@ export default {
           title: 'Table',
           to: '/Refill',
         },
+        {
+          icon: 'mdi-apps',
+          title: 'Bill',
+          to: '/Bill',
+        },
+        {
+          icon: 'mdi-apps',
+          title: 'Game',
+          to: '/Game',
+        },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'Top up store',
     }
   },
 }
