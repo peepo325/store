@@ -1,22 +1,25 @@
 <template>
   <div>
-    <v-list-title>
+    <v-form ref="form">
       <v-text-field
         v-model="refNO"
         label="REF Number"
         outlined
         :counter="13"
       ></v-text-field>
-    </v-list-title>
-    <v-btn @click="search(), reset()">ตรวจสอบ</v-btn>
+    </v-form>
+    <v-btn @click="search()">ตรวจสอบ</v-btn>
     <v-card class="mx-auto" max-width="344">
       <v-card-text>
         <div>
-          <ul id="detail"></ul>
+          {{ price }}
+          {{ genre }}
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn text color="deep-purple accent-4">ADD TO CART</v-btn>
+        <v-btn text color="deep-purple accent-4" @click="cart(), reset()"
+          >ADD TO CART</v-btn
+        >
       </v-card-actions>
     </v-card>
 
@@ -75,72 +78,40 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import { db } from '~/plugins/Fb.js'
 export default {
   data() {
     return {
-      valid: true,
-      arr: {},
       refNO: '',
-      phone: '',
-      email: '',
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      select: null,
-      items: ['ค่าไฟ', 'ค่าน้ำ'],
+      price: '',
+      genre: '',
     }
   },
   methods: {
     reset() {
-      this.refNO = ''
+      this.$refs.form.reset()
     },
-    set() {
+    cart() {
       const data = {
-        email: this.email,
-        phone: this.phone,
-        select: this.select,
-        time: firebase.firestore.Timestamp.now(),
+        price: this.price,
+        number: this.refNO,
+        genre: this.genre,
       }
-      /* db.collection('Bill')
-        .add(data)
-        .then(() => {
-          console.log('add to db')
-        }) */
       this.$store.commit('set_cart', data)
+      alert('ใส่ตะกร้าเรียบร้อย')
     },
     search() {
-      const detail = document.querySelector('#detail')
-      function renderdetail(doc) {
-        const li = document.createElement('li')
-        // let email = document.createElement('span')
-        const phone = document.createElement('span')
-        const select = document.createElement('span')
-        const price = document.createElement('span')
-
-        li.setAttribute('data-id', doc.id)
-        // email.textContent = doc.data().email
-        phone.textContent = doc.data().phone
-        select.textContent = doc.data().select
-        price.textContent = doc.data().price
-
-        // title.appendChild(email)
-        li.appendChild(phone)
-        li.appendChild(select)
-        li.appendChild(price)
-
-        detail.appendChild(li)
-      }
       db.collection('Bill')
         .where('refNO', '==', this.refNO)
-        .get()
-        .then((snapshot) => {
-          snapshot.docs.forEach((doc) => {
-            renderdetail(doc)
-            console.log(doc.data())
+        .onSnapshot(function (querySnapshot) {
+          const price1 = []
+          const select1 = []
+          querySnapshot.forEach(function (doc) {
+            price1.push(doc.data().price)
+            select1.push(doc.data().select)
           })
+          this.genre = select1[0]
+          this.price = price1[0]
         })
     },
   },

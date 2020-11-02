@@ -60,7 +60,7 @@
               <v-list-item-subtitle
                 >รายการ : {{ item.genre }}
               </v-list-item-subtitle>
-              <v-list-item-subtitle v-if="data()"
+              <v-list-item-subtitle
                 >จำนวน : {{ item.number }}
               </v-list-item-subtitle>
             </v-list-item-content>
@@ -68,7 +68,7 @@
           ราคาสุทธิ : {{ item.price }}
         </v-list-item>
         <center>
-          <v-btn to="payment">ชำระเงิน</v-btn>
+          <v-btn to="/payment">ชำระเงิน</v-btn>
         </center>
       </v-list>
     </v-navigation-drawer>

@@ -1,8 +1,5 @@
 <template>
   <div>
-    <v-list-item v-for="item in cart" :key="item.number">
-      <v-card class="mx-auto pa-4" elevation="11"></v-card>
-    </v-list-item>
     <v-row>
       <v-col cols="3">
         <img
@@ -25,7 +22,7 @@
     </v-row>
     <v-card class="mx-auto pa-4" elevation="11">
       <h3>ซื้อบัตรเติมเงินโทรศัพท์</h3>
-      <v-form>
+      <v-form ref="form">
         <v-row>
           <v-col cols="8">
             <v-select
@@ -55,14 +52,14 @@
           <v-checkbox v-model="price" label="1000" value="1000"> </v-checkbox>
         </v-row>
         <v-row>
-          <v-text-field solo readonly>{{ summary }}</v-text-field>
+          <!-- <v-text-field solo readonly>{{ summary }}</v-text-field>-->
         </v-row>
 
         <v-row>
           <v-col cols="10"> </v-col>
           <v-col cols="2">
-            <v-btn color="primary" text @click="addData(), reset(), addcart()">
-              Submit
+            <v-btn color="primary" text @click="addData(), reset()">
+              ADD TO CART
             </v-btn>
           </v-col>
         </v-row>
@@ -72,7 +69,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import { db } from '~/plugins/Fb.js'
 export default {
   data() {
@@ -81,6 +77,7 @@ export default {
       genre: ['AIS', 'Dtac', 'Truemove', 'TOT Moblie'],
       price: '',
       number: '1',
+      sumnary: this.price * this.number,
     }
   },
   methods: {
@@ -92,7 +89,6 @@ export default {
         genre: this.genre1,
         price: this.price,
         number: this.number,
-        time: firebase.firestore.Timestamp.now(),
         summary: this.price * this.number,
       }
       db.collection('phone')
@@ -101,6 +97,7 @@ export default {
           console.log('add to db')
         })
       this.$store.commit('set_cart', data)
+      alert('ใส่ตะกร้าเรียบร้อย')
     },
   },
 }

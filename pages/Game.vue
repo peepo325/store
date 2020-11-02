@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div>
     <v-list-item v-for="item in cart" :key="item.number">
       <v-card class="mx-auto pa-4" elevation="11"></v-card>
@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import { db } from '~/plugins/Fb.js'
 export default {
   data() {
@@ -92,7 +91,6 @@ export default {
         genre: this.genre1,
         price: this.price,
         number: this.number,
-        time: firebase.firestore.Timestamp.now(),
         summary: this.price * this.number,
       }
       db.collection('phone')
@@ -105,3 +103,4 @@ export default {
   },
 }
 </script>
+-->
