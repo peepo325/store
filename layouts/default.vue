@@ -38,7 +38,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
+        <v-icon>mdi-cart</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -48,12 +48,28 @@
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
-        <v-list-item @click.native="right = !right">
+        <v-list-item>
           <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
+            <v-icon> mdi-cart </v-icon>
           </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+          <v-list-item-title>Shopping Cart</v-list-item-title>
         </v-list-item>
+        <v-list-item v-for="item in cart" :key="item.number">
+          <v-card-title>
+            <v-list-item-content>
+              <v-list-item-subtitle
+                >รายการ : {{ item.genre }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle v-if="data()"
+                >จำนวน : {{ item.number }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-card-title>
+          ราคาสุทธิ : {{ item.price }}
+        </v-list-item>
+        <center>
+          <v-btn to="payment">ชำระเงิน</v-btn>
+        </center>
       </v-list>
     </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
@@ -77,18 +93,8 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'check',
-          to: '/check',
-        },
-        {
-          icon: 'mdi-chart-bubble',
           title: 'Mobile',
           to: '/FromRifill',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Table',
-          to: '/Refill',
         },
         {
           icon: 'mdi-apps',
@@ -106,6 +112,13 @@ export default {
       rightDrawer: false,
       title: 'Top up store',
     }
+  },
+  computed: {
+    cart: {
+      get() {
+        return this.$nuxt.$store.state.cart
+      },
+    },
   },
 }
 </script>

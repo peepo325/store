@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <v-cotianer>
+    <div>Welcome to TOP UP Store shop</div>
     <v-carousel>
       <v-carousel-item
         v-for="(pic, i) in pics"
@@ -10,7 +11,7 @@
         cycle
       ></v-carousel-item>
     </v-carousel>
-  </div>
+  </v-cotianer>
 </template>
 <script>
 export default {
