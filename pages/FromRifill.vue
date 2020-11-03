@@ -20,17 +20,23 @@
         />
       </v-col>
     </v-row>
-    <v-card class="mx-auto pa-4" elevation="11">
-      <h3>ซื้อบัตรเติมเงินโทรศัพท์</h3>
+    <v-card
+      v-for="(item, i) in items"
+      :key="i"
+      :src="item.src"
+      class="mx-auto pa-4"
+      elevation="11"
+      ><v-img>{{ item.src }}</v-img>
+      <h3>ซื้อบัตรเติมเงิน</h3>
       <v-form ref="form">
         <v-row>
           <v-col cols="8">
-            <v-select
+            <!--<v-select
               v-model="genre1"
               :items="genre"
               label="เครือข่าย"
               required
-            ></v-select>
+            ></v-select>-->
           </v-col>
           <v-col cols="4">
             <v-text-field
@@ -52,10 +58,6 @@
           <v-checkbox v-model="price" label="1000" value="1000"> </v-checkbox>
         </v-row>
         <v-row>
-          <!-- <v-text-field solo readonly>{{ summary }}</v-text-field>-->
-        </v-row>
-
-        <v-row>
           <v-col cols="10"> </v-col>
           <v-col cols="2">
             <v-btn color="primary" text @click="addData(), reset()">
@@ -75,9 +77,23 @@ export default {
     return {
       genre1: '',
       genre: ['AIS', 'Dtac', 'Truemove', 'TOT Moblie'],
-      price: '',
+      price: null,
       number: '1',
-      sumnary: this.price * this.number,
+      summary: '',
+      items: [
+        {
+          src: 'http://tasty-dsign.com/demo/playzone/images/dtac-1.jpg',
+          icon: 'mdi-apps',
+        },
+        {
+          src: 'http://www.lnwtrue.com/static/images/product/truemoney-1.jpg',
+          icon: 'mdi-apps',
+        },
+        {
+          src: 'https://www.lnwtrue.com/static/images/product/12call-1.jpg',
+          icon: 'mdi-apps',
+        },
+      ],
     }
   },
   methods: {
@@ -89,7 +105,7 @@ export default {
         genre: this.genre1,
         price: this.price,
         number: this.number,
-        summary: this.price * this.number,
+        summary: (this.summary += this.summary),
       }
       db.collection('phone')
         .add(data)

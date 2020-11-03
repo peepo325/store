@@ -10,32 +10,26 @@
       </v-col>
       <v-col cols="3">
         <img
-          src="https://www.lnwtrue.com/static/images/product/garena-1.jpg"
+          src="https://www.lnwtrue.com/static/images/product/12call-1.jpg"
           alt=""
         />
       </v-col>
       <v-col cols="3">
         <img
-          src="https://www.lnwtrue.com/static/images/product/steam-1.jpg"
-          alt=""
-        />
-      </v-col>
-      <v-col cols="3">
-        <img
-          src="https://www.lnwtrue.com/static/images/product/acash-1.jpg"
+          src="http://tasty-dsign.com/demo/playzone/images/dtac-1.jpg"
           alt=""
         />
       </v-col>
     </v-row>
     <v-card class="mx-auto pa-4" elevation="11">
-      <h3>ซื้อบัตรเติมเงินเกมออนไลน์</h3>
+      <h3>ซื้อบัตรเติมเงินโทรศัพท์</h3>
       <v-form ref="form">
         <v-row>
           <v-col cols="8">
             <v-select
               v-model="genre1"
               :items="genre"
-              label="ชนิดของบัตร"
+              label="เครือข่าย"
               required
             ></v-select>
           </v-col>
@@ -78,8 +72,7 @@ export default {
   data() {
     return {
       genre1: '',
-      genre: ['Truemoney', 'Steam wallet', '@Cash', 'Garena shell'],
-
+      genre: ['AIS', 'Dtac', 'Truemove', 'TOT Moblie'],
       price: '',
       number: '1',
     }
@@ -95,7 +88,7 @@ export default {
         number: this.number,
         summary: this.price * this.number,
       }
-      db.collection('game')
+      db.collection('phone')
         .add(data)
         .then(() => {
           console.log('add to db')

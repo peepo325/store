@@ -26,15 +26,6 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
@@ -63,12 +54,14 @@
               <v-list-item-subtitle
                 >จำนวน : {{ item.number }}
               </v-list-item-subtitle>
+              <v-list-item-subtitle
+                >ราคา : {{ item.price }}
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-card-title>
-          ราคาสุทธิ : {{ item.price }}
         </v-list-item>
         <center>
-          <v-btn to="/payment">ชำระเงิน</v-btn>
+          <v-btn nuxt link to="payment">ชำระเงิน</v-btn>
         </center>
       </v-list>
     </v-navigation-drawer>
@@ -82,27 +75,22 @@
 export default {
   data() {
     return {
-      clipped: false,
+      clipped: true,
       drawer: false,
-      fixed: false,
+
       items: [
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-home',
           title: 'Homepage',
           to: '/',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-phone',
           title: 'Mobile',
-          to: '/FromRifill',
+          to: '/phone',
         },
         {
-          icon: 'mdi-apps',
-          title: 'Bill',
-          to: '/Bill',
-        },
-        {
-          icon: 'mdi-apps',
+          icon: 'mdi-play',
           title: 'Game',
           to: '/Game',
         },
